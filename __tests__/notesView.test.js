@@ -7,15 +7,8 @@ const fs = require('fs');
 const NotesModel = require('../src/notesModel');
 const NotesView = require('../src/notesView'); 
 const NotesClient = require('../src/notesClient');
-jest.mock('../src/notesClient');
 
 describe(NotesView, () => {
-  beforeEach(() => {
-    // Before each test, reset the mock
-    // This helps starting each test case
-    // with a "fresh" mocked class
-    NotesClient.mockClear();
-  });
   
   it('displays two notes', () => {
     document.body.innerHTML = fs.readFileSync('./index.html');
@@ -62,20 +55,13 @@ describe(NotesView, () => {
     expect(document.querySelectorAll('div.note').length).toEqual(2)
   })
   it ("Loads notes from an api", () =>{
-    const mockedClient = new NotesClient();
-
-    // mockedClient.loadNotes.mockImplementation((callback) => {
-    //   callback(['mocked note']);
-    // });
-
-    //mockedClient.loadNotes.mockImplementation(() => 'mocked note');
-
-
+    const mockedClient = {
+      loadNotes: (callback) => callback(['mocked note 1', 'mocked note 2'])
+    }
+  
     const model = new NotesModel();
     const view = new NotesView(model, mockedClient);
-    
-
     view.displayNotesFromAPI()
-    expect(model.getNotes()).toEqual(["mocked note "])
+    expect(model.getNotes()).toEqual(["mocked note 1" , "mocked note 2"])
   })
 });
