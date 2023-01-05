@@ -7,6 +7,9 @@ class NotesModel{
   {
     return this.notes
   }
+  setNotes = (notes) => {
+    this.notes = notes;
+  }
 
   addNote = (note) =>{
     this.notes.push(note)
