@@ -1,4 +1,4 @@
-const NotesClient = require('../src/notesClient');
+const NotesClient = require('./src/notesClient');
 
 // This makes `fetch` available to our test
 // (it is not by default, as normally `fetch` is only

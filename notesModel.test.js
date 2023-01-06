@@ -1,4 +1,4 @@
-const NotesModel = require("../src/notesModel")
+const NotesModel = require("./src/notesModel")
 describe('notesModel', () => {
   it ('Creates an empty notes list', () =>{
     const model = new NotesModel();
